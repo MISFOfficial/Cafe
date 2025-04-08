@@ -1,8 +1,8 @@
 import React from 'react';
+import { FaBookmark } from "react-icons/fa6";
 
-const Blog = ({ blog }) => {
-
-    console.log(blog)
+const Blog = ({ blog, handleBookMarked }) => {
+    // console.log(handleBookMarked)
     return (
         <div>
             {/* each blog in dynamic */}
@@ -11,16 +11,21 @@ const Blog = ({ blog }) => {
                     <img
                         src={blog.cover} />
                 </figure>
-                <div className="card-body text-start">
-                    <div className=" author flex items-center ">
-                        <p>{blog.author}</p>
-                        <img src={blog.author_img} alt="" className='w-[50px]' />
+                <div className="p-5 flex flex-col gap-y-5 text-start ">
+                    {/* author */}
+                    <div className="flex items-center justify-between">
+                        <p className='font-bold'>{blog.author}</p>
+                        <div className='flex items-center gap-7'>
+                            <img src={blog.author_img} alt="" className='w-[50px] ' />
+                            <button onClick={()=>handleBookMarked(blog)} className='btn p-0 bg-transparent border-none'><FaBookmark className='text-2xl'/></button>
+                        </div>
                     </div>
+                    {/* text-part */}
                     <h2 className="card-title">{blog.title}</h2>
-                    <div className="hashtags flex items-start">
+                    <div className="hashtags flex items-start  gap-5">
                         {
                             Object.values(blog.hashtags).map((hashtag, index) => (
-                                <span key={index} className="badge badge-outline mr-2">{hashtag}</span>
+                                <span key={index} className="flex gap-">{hashtag}</span>
                             ))
                         }
                     </div>
